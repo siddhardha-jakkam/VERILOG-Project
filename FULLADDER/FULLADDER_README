@@ -1,0 +1,510 @@
+# Full Adder Using Verilog HDL
+
+A **Full Adder** is a combinational digital circuit used to add **three 1-bit binary values**.
+
+It takes two input bits and a carry from the previous addition and produces two outputs: **Sum** and **Carry**.
+
+---
+
+## 1. Project Overview
+
+### Inputs
+
+| Input | Meaning                         |
+| ----- | ------------------------------- |
+| `A`   | First input bit                 |
+| `B`   | Second input bit                |
+| `Cin` | Carry input from previous stage |
+
+### Outputs
+
+| Output  | Meaning                           |
+| ------- | --------------------------------- |
+| `SUM`   | Result bit                        |
+| `CARRY` | Carry generated from the addition |
+
+### Basic Flow
+
+```text
+       A ───────┐
+                │
+       B ───────┼──► FULL ADDER ───► SUM
+                │
+      Cin ──────┘
+                       │
+                       └────────────► CARRY
+```
+
+---
+
+# 2. How a Full Adder Works
+
+A Full Adder performs:
+
+```text
+A + B + Cin
+```
+
+For example:
+
+```text
+  1
+  1
++ 1
+────
+ 11
+```
+
+Therefore:
+
+```text
+SUM   = 1
+CARRY = 1
+```
+
+The Full Adder has **3 inputs and 2 outputs**.
+
+---
+
+# 3. Truth Table
+
+Since there are 3 inputs, there are:
+
+```text
+2³ = 8 combinations
+```
+
+| A | B | Cin | SUM | CARRY |
+| - | - | --- | --- | ----- |
+| 0 | 0 | 0   | 0   | 0     |
+| 0 | 0 | 1   | 1   | 0     |
+| 0 | 1 | 0   | 1   | 0     |
+| 0 | 1 | 1   | 0   | 1     |
+| 1 | 0 | 0   | 1   | 0     |
+| 1 | 0 | 1   | 0   | 1     |
+| 1 | 1 | 0   | 0   | 1     |
+| 1 | 1 | 1   | 1   | 1     |
+
+### Simple observation
+
+**SUM is 1 when the number of 1s is odd.**
+
+**CARRY is 1 when at least two inputs are 1.**
+
+---
+
+# 4. K-Map Simplification
+
+We use **Karnaugh Maps (K-Maps)** to simplify the Boolean equations.
+
+The process is:
+
+```text
+Truth Table
+     ↓
+Find output = 1
+     ↓
+Create K-Map
+     ↓
+Make groups
+     ↓
+Get simplified Boolean equation
+     ↓
+Write Verilog code
+```
+
+---
+
+# 5. SUM K-Map
+
+From the truth table, `SUM = 1` for:
+
+```text
+001, 010, 100, 111
+```
+
+Therefore:
+
+```text
+SUM = Σm(1,2,4,7)
+```
+
+### K-Map
+
+We use Gray-code order for `B Cin`:
+
+```text
+             B Cin
+             00  01  11  10
+           +-----------------
+A = 0      |  0   1   0   1
+A = 1      |  0   0   1   0
+           +-----------------
+```
+
+The four `1`s are not adjacent, so they cannot be combined into larger groups.
+
+Therefore:
+
+```text
+SUM = A'B'Cin + A'BCin' + AB'Cin' + ABCin
+```
+
+This is the standard **3-input XOR** function:
+
+```text
+SUM = A ⊕ B ⊕ Cin
+```
+
+### Verilog
+
+```verilog
+assign SUM = A ^ B ^ Cin;
+```
+
+---
+
+# 6. CARRY K-Map
+
+From the truth table, `CARRY = 1` for:
+
+```text
+011, 101, 110, 111
+```
+
+Therefore:
+
+```text
+CARRY = Σm(3,5,6,7)
+```
+
+### K-Map
+
+```text
+             B Cin
+             00  01  11  10
+           +-----------------
+A = 0      |  0   0   1   0
+A = 1      |  0   1   1   1
+           +-----------------
+```
+
+Now we make three groups.
+
+### Group 1
+
+```text
+m6 + m7
+```
+
+Common variables:
+
+```text
+A = 1
+B = 1
+```
+
+So:
+
+```text
+AB
+```
+
+### Group 2
+
+```text
+m5 + m7
+```
+
+Common variables:
+
+```text
+A = 1
+Cin = 1
+```
+
+So:
+
+```text
+ACin
+```
+
+### Group 3
+
+```text
+m3 + m7
+```
+
+Common variables:
+
+```text
+B = 1
+Cin = 1
+```
+
+So:
+
+```text
+BCin
+```
+
+Therefore:
+
+```text
+CARRY = AB + ACin + BCin
+```
+
+### Verilog
+
+```verilog
+assign CARRY = (A & B) | (A & Cin) | (B & Cin);
+```
+
+---
+
+# 7. Final Boolean Equations
+
+| Output  | Simplified Equation | Verilog                             |
+| ------- | ------------------- | ----------------------------------- |
+| `SUM`   | `A ⊕ B ⊕ Cin`       | `A ^ B ^ Cin`                       |
+| `CARRY` | `AB + ACin + BCin`  | `(A & B) \| (A & Cin) \| (B & Cin)` |
+
+So the complete logic is:
+
+```text
+                 ┌──────────────┐
+A ──────────────►│              │
+B ──────────────►│ FULL ADDER   │──────► SUM
+Cin ────────────►│              │
+                 │              │──────► CARRY
+                 └──────────────┘
+```
+
+---
+
+# 8. Verilog RTL Design
+
+```verilog
+module FULL_ADDER(
+    input A,
+    input B,
+    input Cin,
+    output SUM,
+    output CARRY
+);
+
+assign SUM = A ^ B ^ Cin;
+assign CARRY = (A & B) | (A & Cin) | (B & Cin);
+
+endmodule
+```
+
+### What each operator means
+
+| Verilog | Meaning |    |
+| ------- | ------- | -- |
+| `^`     | XOR     |    |
+| `&`     | AND     |    |
+| `       | `       | OR |
+| `~`     | NOT     |    |
+
+---
+
+# 9. Testbench
+
+A **testbench** is used to check whether our Verilog design works correctly.
+
+```text
+             Testbench
+                 │
+                 │ gives inputs
+                 ▼
+           Full Adder RTL
+                 │
+                 │ produces outputs
+                 ▼
+             Waveform
+                 │
+                 ▼
+       Compare with Truth Table
+```
+
+The testbench should test all 8 possible combinations:
+
+```text
+000
+001
+010
+011
+100
+101
+110
+111
+```
+
+If the outputs match the truth table, our design is working correctly.
+
+---
+
+# 10. Simulation
+
+The design is simulated using **Xilinx Vivado**.
+
+### Simulation flow
+
+```text
+Verilog RTL
+     ↓
+Create Testbench
+     ↓
+Run Behavioral Simulation
+     ↓
+Observe SUM & CARRY
+     ↓
+Check Waveform
+     ↓
+Compare with Truth Table
+     ↓
+Design Verified ✓
+```
+
+The waveform should show the correct `SUM` and `CARRY` values for all input combinations.
+
+---
+
+# 11. RTL Schematic
+
+Vivado can convert the Verilog description into a hardware-level RTL schematic.
+
+Conceptually:
+
+```text
+             ┌─────┐
+A ──────────►│ XOR │───┐
+             └─────┘   │
+                       ├──► XOR ───► SUM
+B ─────────────────────┘      ▲
+                              │
+Cin ──────────────────────────┘
+
+
+A ─────┐
+       ├──► AND ───┐
+B ─────┘           │
+                   │
+B ─────┐           │
+       ├──► AND ───┼──► OR ───► CARRY
+Cin ───┘           │
+                   │
+A ─────┐           │
+       ├──► AND ───┘
+Cin ───┘
+```
+
+---
+
+# 12. Project Structure
+
+Keep your project organized like this:
+
+```text
+FULLADDER/
+│
+├── RTL/
+│   └── FULLADDERDESIGN.v
+│
+├── Simulation/
+│   └── FULLADDERTESTBENCH.v
+│
+├── Documentation/
+│   ├── design.png
+│   ├── schematic.png
+│   ├── testbench.png
+│   └── waveform.png
+│
+└── README.md
+```
+
+### Folder purpose
+
+| Folder          | Contains                                 |
+| --------------- | ---------------------------------------- |
+| `RTL`           | Actual Verilog hardware design           |
+| `Simulation`    | Testbench                                |
+| `Documentation` | Schematic, code screenshots and waveform |
+| `README.md`     | Complete project explanation             |
+
+---
+
+# 13. Tools Used
+
+* **Verilog HDL**
+* **Xilinx Vivado**
+* RTL Schematic
+* Behavioral Simulation
+
+---
+
+# 14. Learning Outcomes
+
+Through this project, I learned:
+
+* Full Adder operation
+* Binary addition
+* Truth tables
+* Boolean expressions
+* K-Map simplification
+* XOR, AND and OR operations
+* Verilog `assign` statements
+* Writing a Verilog testbench
+* RTL schematic generation
+* Simulation and waveform verification
+
+---
+
+# 15. Complete Project Flow
+
+```text
+                  FULL ADDER DESIGN
+                         │
+                         ▼
+                  Define Inputs
+                  A, B, Cin
+                         │
+                         ▼
+                    Truth Table
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+          SUM = 1                 CARRY = 1
+              │                     │
+              ▼                     ▼
+           SUM K-Map             CARRY K-Map
+              │                     │
+              ▼                     ▼
+        A ⊕ B ⊕ Cin          AB + ACin + BCin
+              │                     │
+              └──────────┬──────────┘
+                         ▼
+                    Verilog RTL
+                         │
+                         ▼
+                     Testbench
+                         │
+                         ▼
+                  Vivado Simulation
+                         │
+                         ▼
+                      Waveform
+                         │
+                         ▼
+                    Verification ✓
+```
+
+## 🎯 Final Result
+
+The Full Adder was successfully designed using **Boolean logic and K-Map simplification**, implemented using **Verilog HDL**, and verified through **Vivado simulation**.
+
+The project demonstrates the complete digital-design flow:
+
+**Specification → Truth Table → K-Map → Boolean Simplification → RTL Coding → Testbench → Simulation → Waveform Verification.**
