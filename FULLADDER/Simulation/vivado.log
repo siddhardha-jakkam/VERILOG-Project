@@ -1,0 +1,21 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1733598 on Wed Dec 14 22:35:39 MST 2016
+# IP Build 1731160 on Wed Dec 14 23:47:21 MST 2016
+# Start of session at: Mon Sep 14 23:52:57 2026
+# Process ID: 32668
+# Current directory: C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent32472 C:\Users\Siddardha124\OneDrive\Documents\VLSI_PROJECTS\FULLADDER\FULLADDER.xpr
+# Log file: C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/vivado.log
+# Journal file: C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.xpr
+CRITICAL WARNING: [Project 1-19] Could not find the file 'C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDERDESIGN.v'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2016.4/data/ip'.
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Sep 14 23:53:27 2026...

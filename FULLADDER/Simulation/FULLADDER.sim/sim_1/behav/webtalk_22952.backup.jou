@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2016.4 (64-bit)
+# SW Build 1733598 on Wed Dec 14 22:35:39 MST 2016
+# IP Build 1731160 on Wed Dec 14 23:47:21 MST 2016
+# Start of session at: Mon Sep 14 23:39:48 2026
+# Process ID: 22952
+# Current directory: C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.sim/sim_1/behav
+# Command line: wbtcv.exe -mode batch -source C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.sim/sim_1/behav/xsim.dir/FULLADDERTEDTBENCH_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.sim/sim_1/behav/webtalk.log
+# Journal file: C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.sim/sim_1/behav\webtalk.jou
+#-----------------------------------------------------------
+source C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.sim/sim_1/behav/xsim.dir/FULLADDERTEDTBENCH_behav/webtalk/xsim_webtalk.tcl -notrace

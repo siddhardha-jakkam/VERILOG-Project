@@ -1,0 +1,42 @@
+Unable to capture context for thread 33808 in process 24720, can not generate back trace
+Unable to capture context for thread 34232 in process 24720, can not generate back trace
+Unable to capture context for thread 15356 in process 24720, can not generate back trace
+Exception at PC 0x00007FFD41EDBB93
+Printing stacktrace...
+
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Unable to capture context for thread 24816 in process 24720, can not generate back trace
+Unable to capture context for thread 6856 in process 24720, can not generate back trace
+Unable to capture context for thread 20384 in process 24720, can not generate back trace
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+[0]  [0x00007FFD41EDBB93]
+[1]  [0x00007FFD41EDBB93]
+[2]  [0x00007FFD41EDB4A1]
+[3]  [0x00007FFD41EDB459]
+[4]  [0x00007FFD41EC19FE]
+[5]  [0x00007FFD41EC0ED1]
+[6]  [0x00007FFD41EC0D76]
+[7]  [0x00007FFD41E679F6]
+[8]  [0x00007FFD41E57AFB]
+[9]  [0x00007FFD41F7E90A]
+[10]  [0x00007FFD41F99F87]
+[11]  [0x00007FFD41F9A05F]
+[12] (BaseThreadInitThunk+0x17) [0x00007FFE6DC4CD87]
+[13] (RtlUserThreadStart+0x2c) [0x00007FFE6E5ECAEC]
+Done
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA
+Exception at PC 0x00007FFE6BF141CA

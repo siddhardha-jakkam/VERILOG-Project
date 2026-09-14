@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDERDESIGN.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FULLADDERDESIGN
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.srcs/sim_1/new/FULLADDERTEDTBENCH.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FULLADDERTEDTBENCH
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Siddardha124/OneDrive/Documents/VLSI_PROJECTS/FULLADDER/FULLADDER.sim/sim_1/behav/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
